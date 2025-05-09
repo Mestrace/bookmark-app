@@ -1,8 +1,6 @@
 require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const cors = require('cors');
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpecs = require('./config/swagger');
 const connectDB = require('./config/db');
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,6 +26,5 @@ app.use('/api/v1/bookmark', require('./routes/bookmark'));
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
-    console.log(`API Documentation available at http://localhost:${PORT}/api-docs`);
 });
 
