@@ -3,27 +3,27 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect(process.env.DATABASE_URL, {
-            serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-            socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
         });
 
         console.log(`MongoDB Connected: ${conn.connection.host}`);
 
-        // Handle connection events
+
         mongoose.connection.on('error', err => {
             console.error('MongoDB connection error:', err);
         });
 
         mongoose.connection.on('disconnected', () => {
             console.log('MongoDB disconnected. Attempting to reconnect...');
-            setTimeout(connectDB, 5000); // Try to reconnect after 5 seconds
+            setTimeout(connectDB, 5000);
         });
 
         mongoose.connection.on('reconnected', () => {
             console.log('MongoDB reconnected');
         });
 
-        // Handle process termination
+
         process.on('SIGINT', async () => {
             try {
                 await mongoose.connection.close();
@@ -37,7 +37,7 @@ const connectDB = async () => {
 
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
-        // Retry connection after 5 seconds
+
         setTimeout(connectDB, 5000);
     }
 };
