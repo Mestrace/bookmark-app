@@ -1,7 +1,6 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import axios from 'axios';
 import styles from './AddBookmarkModal.module.css';
-import formStyles from './AddBookmarkForm.module.css';
 import { useToast } from './ToastContainer';
 import { IBookmark } from '../types/bookmark';
 
@@ -12,11 +11,11 @@ interface AddBookmarkModalProps {
     onClose?: () => void;
 }
 
-const AddBookmarkModal: React.FC<AddBookmarkModalProps> = ({ 
-    onBookmarkAdded, 
+const AddBookmarkModal: React.FC<AddBookmarkModalProps> = ({
+    onBookmarkAdded,
     onBookmarkUpdated,
     bookmarkToEdit,
-    onClose 
+    onClose
 }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [url, setUrl] = useState<string>('');
@@ -123,12 +122,12 @@ const AddBookmarkModal: React.FC<AddBookmarkModalProps> = ({
                                 {isEditMode ? 'Edit Bookmark' : 'Add New Bookmark'}
                             </h2>
 
-                            <div className={formStyles.formGroup}>
-                                <label htmlFor="url" className={formStyles.label}>URL:</label>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="url" className={styles.label}>URL:</label>
                                 <input
                                     type="url"
                                     id="url"
-                                    className={formStyles.input}
+                                    className={styles.input}
                                     value={url}
                                     onChange={(e) => setUrl(e.target.value)}
                                     required
@@ -136,12 +135,12 @@ const AddBookmarkModal: React.FC<AddBookmarkModalProps> = ({
                                 />
                             </div>
 
-                            <div className={formStyles.formGroup}>
-                                <label htmlFor="title" className={formStyles.label}>Title:</label>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="title" className={styles.label}>Title:</label>
                                 <input
                                     type="text"
                                     id="title"
-                                    className={formStyles.input}
+                                    className={styles.input}
                                     value={title}
                                     onChange={(e) => setTitle(e.target.value)}
                                     required
@@ -149,23 +148,23 @@ const AddBookmarkModal: React.FC<AddBookmarkModalProps> = ({
                                 />
                             </div>
 
-                            <div className={formStyles.formGroup}>
-                                <label htmlFor="description" className={formStyles.label}>Description (optional):</label>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="description" className={styles.label}>Description (optional):</label>
                                 <textarea
                                     id="description"
-                                    className={formStyles.textarea}
+                                    className={styles.textarea}
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     disabled={isLoading}
                                 />
                             </div>
 
-                            <div className={formStyles.formGroup}>
-                                <label htmlFor="tags" className={formStyles.label}>Tags (comma-separated, optional):</label>
+                            <div className={styles.formGroup}>
+                                <label htmlFor="tags" className={styles.label}>Tags (comma-separated, optional):</label>
                                 <input
                                     type="text"
                                     id="tags"
-                                    className={formStyles.input}
+                                    className={styles.input}
                                     value={tags}
                                     onChange={(e) => setTags(e.target.value)}
                                     placeholder="e.g. tech, news, reference"
@@ -173,7 +172,7 @@ const AddBookmarkModal: React.FC<AddBookmarkModalProps> = ({
                                 />
                             </div>
 
-                            <button type="submit" className={formStyles.submitButton} disabled={isLoading}>
+                            <button type="submit" className={styles.submitButton} disabled={isLoading}>
                                 {isLoading ? (isEditMode ? 'Updating...' : 'Adding...') : (isEditMode ? 'Update Bookmark' : 'Add Bookmark')}
                             </button>
                         </form>
